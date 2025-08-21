@@ -1,0 +1,145 @@
+﻿@model IEnumerable<Master_Roots.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="page-container">
+    <!-- Header with image/logo -->
+    <div class="header">
+        <img src="~/images/Logo 1 without bg.png" alt="School Logo" class="logo" />
+        <h1>Student's Records</h1>
+    </div>
+
+    <div class="action-bar">
+        <a asp-action="Create" class="btn-create">Add New Student</a>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Standard)</th>
+                <th>@Html.DisplayNameFor(model => model.Section)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Standard)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Section)</td>
+                    <td class="actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-link edit">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn-link details">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-link delete">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<!-- CSS -->
+<style>
+    .page-container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .action-bar {
+        margin-bottom: 15px;
+    }
+
+    .btn-create {
+        background: #3498db;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .btn-create:hover {
+            background: #2980b9;
+            color: white
+        }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+        .styled-table thead {
+            background: #34495e;
+            color: #fff;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .styled-table tbody tr:hover {
+            background: #f4f6f9;
+        }
+
+    .actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn-link {
+        text-decoration: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+        .btn-link.edit {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-link.details {
+            background: #2980b9;
+            color: white;
+        }
+
+        .btn-link.delete {
+            background: #c0392b;
+            color: white;
+        }
+
+        .btn-link:hover {
+            opacity: 0.85;
+        }
+</style>

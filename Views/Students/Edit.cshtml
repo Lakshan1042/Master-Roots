@@ -1,0 +1,104 @@
+﻿@model Master_Roots.Models.Student
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<div class="form-container">
+    <div class="form-card">
+        <h2 class="form-title">Edit Student</h2>
+        <hr />
+
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Standard"></label>
+                    <input asp-for="Standard" class="form-control" />
+                    <span asp-validation-for="Standard" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Section"></label>
+                    <input asp-for="Section" class="form-control" />
+                    <span asp-validation-for="Section" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Age"></label>
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Gender"></label>
+                    <input asp-for="Gender" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Father_Name"></label>
+                    <input asp-for="Father_Name" class="form-control" />
+                    <span asp-validation-for="Father_Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Father_Mobile_Number"></label>
+                    <input asp-for="Father_Mobile_Number" class="form-control" />
+                    <span asp-validation-for="Father_Mobile_Number" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Mother_Name"></label>
+                    <input asp-for="Mother_Name" class="form-control" />
+                    <span asp-validation-for="Mother_Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Mother_Mobile_Number"></label>
+                    <input asp-for="Mother_Mobile_Number" class="form-control" />
+                    <span asp-validation-for="Mother_Mobile_Number" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <textarea asp-for="Address" class="form-control"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Blood_Group"></label>
+                    <input asp-for="Blood_Group" class="form-control" />
+                    <span asp-validation-for="Blood_Group" class="text-danger"></span>
+                </div>
+
+                <!-- Image Upload Section -->
+                <div class="form-group image-upload">
+                    <label>Upload Student Photo</label>
+                    <input type="file" class="form-control-file" />
+                    <div class="image-preview">
+                        <img src="~/images/default-profile.png" alt="Preview" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

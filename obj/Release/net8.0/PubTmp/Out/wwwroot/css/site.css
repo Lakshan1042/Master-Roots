@@ -1,0 +1,183 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.form-card {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 900px;
+    width: 100%;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem 2rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: .4rem;
+    display: block;
+    color: #444;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.image-upload {
+    grid-column: span 2; /* takes full row */
+}
+
+.image-preview {
+    margin-top: .5rem;
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+}
+
+    .image-preview img {
+        width: 100%;
+        height: auto;
+    }
+
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background: #f5f7fa;
+    padding: 20px;
+}
+
+.register-card {
+    display: flex;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 900px;
+    max-width: 100%;
+}
+
+.register-form {
+    flex: 1;
+    padding: 40px;
+}
+
+    .register-form h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .register-form h2 {
+        font-size: 18px;
+        font-weight: 400;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+.form-control {
+    border-radius: 8px !important;
+    padding: 12px;
+}
+
+.btn-submit {
+    width: 100%;
+    background: #007bff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+    .btn-submit:hover {
+        background: #0056b3;
+    }
+
+.external-login {
+    margin-top: 30px;
+}
+
+.btn-external {
+    background: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+    .btn-external:hover {
+        background: #ddd;
+    }
+
+.register-image {
+    flex: 1;
+    background: #f0f4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+    .register-image img {
+        max-width: 100%;
+        height: auto;
+    }

@@ -1,0 +1,204 @@
+﻿@model Master_Roots.Models.Student
+
+@{
+    ViewData["Title"] = "Create Student";
+}
+
+<div class="form-container">
+    <h2 class="form-title">Add New Student</h2>
+    <hr />
+
+    <div class="form-layout">
+        <!-- Image Upload / Placeholder -->
+        <div class="form-image">
+            <label for="StudentImage">Student Photo</label>
+            <input type="file" id="StudentImage" class="form-control" />
+            <div class="image-preview">
+                <img src="https://via.placeholder.com/150" alt="Student Preview" id="preview" />
+            </div>
+        </div>
+
+        <!-- Form Fields -->
+        <div class="form-fields">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Standard"></label>
+                    <input asp-for="Standard" class="form-control" />
+                    <span asp-validation-for="Standard" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Section"></label>
+                    <input asp-for="Section" class="form-control" />
+                    <span asp-validation-for="Section" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Age"></label>
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Gender"></label>
+                    <input asp-for="Gender" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Father_Name"></label>
+                    <input asp-for="Father_Name" class="form-control" />
+                    <span asp-validation-for="Father_Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Father_Mobile_Number"></label>
+                    <input asp-for="Father_Mobile_Number" class="form-control" />
+                    <span asp-validation-for="Father_Mobile_Number" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Mother_Name"></label>
+                    <input asp-for="Mother_Name" class="form-control" />
+                    <span asp-validation-for="Mother_Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Mother_Mobile_Number"></label>
+                    <input asp-for="Mother_Mobile_Number" class="form-control" />
+                    <span asp-validation-for="Mother_Mobile_Number" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <textarea asp-for="Address" class="form-control"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Blood_Group"></label>
+                    <input asp-for="Blood_Group" class="form-control" />
+                    <span asp-validation-for="Blood_Group" class="text-danger"></span>
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Create Student" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.getElementById("StudentImage").addEventListener("change", function (event) {
+            const [file] = event.target.files;
+            if (file) {
+                document.getElementById("preview").src = URL.createObjectURL(file);
+            }
+        });
+    </script>
+}
+
+<style>
+    .form-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 25px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .form-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-layout {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .form-image {
+        flex: 1;
+        min-width: 220px;
+        text-align: center;
+    }
+
+        .form-image label {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+    .image-preview {
+        margin-top: 15px;
+    }
+
+        .image-preview img {
+            max-width: 180px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+    .form-fields {
+        flex: 2;
+        min-width: 300px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+    .form-control {
+        border-radius: 6px;
+        padding: 8px 10px;
+    }
+
+    .form-actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 12px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: 500;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border: none;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        border: none;
+        color: #fff;
+        text-decoration: none;
+        line-height: 2.2rem;
+    }
+</style>

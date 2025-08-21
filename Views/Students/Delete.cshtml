@@ -1,0 +1,71 @@
+﻿@model Master_Roots.Models.Student
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-danger text-white text-center">
+            <h3>⚠️ Confirm Deletion</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="text-center text-secondary mb-4">
+                Are you sure you want to delete this student record?
+            </h5>
+
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Name:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Name)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Standard:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Standard)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Section:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Section)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Age:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Age)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Gender:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Gender)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Father's Name:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Father_Name)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Father Mobile:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Father_Mobile_Number)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Mother's Name:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Mother_Name)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Mother Mobile:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Mother_Mobile_Number)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Address:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Address)</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 text-end fw-bold">Blood Group:</div>
+                <div class="col-md-8">@Html.DisplayFor(model => model.Blood_Group)</div>
+            </div>
+
+            <div class="text-center mt-4">
+                <form asp-action="Delete" class="d-inline">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger px-4">Delete</button>
+                </form>
+                <a asp-action="Index" class="btn btn-secondary px-4 ms-2">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
