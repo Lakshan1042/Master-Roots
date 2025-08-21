@@ -1,18 +1,14 @@
-# Use .NET 8 SDK for building
+# Build and publish
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 5000
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
+COPY . .
+RUN dotnet publish -c Release -o /app/publish
 
-# Copy csproj and restore
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o /app
-
-# Use .NET 8 runtime for running
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app ./
-
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "Master_Roots.dll"]

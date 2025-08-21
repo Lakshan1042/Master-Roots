@@ -30,6 +30,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(Int32.Parse(port));
+});
+
+
 var app = builder.Build();
 
 // ------------------ Middleware ------------------
