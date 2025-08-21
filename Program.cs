@@ -6,27 +6,39 @@ using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+// ------------------ SQL Server for Identity ------------------
+var sqlConnection = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddSingleton<IMongoClient>(s =>
-{
-    var mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
-    return new MongoClient(mongoUri);
-});
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(sqlConnection));
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
 
+// ------------------ MongoDB for Custom Data ------------------
+builder.Services.AddSingleton<IMongoClient>(s =>
+{
+    var mongoConnection = builder.Configuration.GetConnectionString("MongoDb");
+    return new MongoClient(mongoConnection);
+});
+
+// Register a MongoDB database accessor
+builder.Services.AddScoped<IMongoDatabase>(s =>
+{
+    var client = s.GetRequiredService<IMongoClient>();
+    return client.GetDatabase("YourMongoDatabaseName"); // <-- Replace with your db name
+});
+
+// ------------------ Other Services ------------------
+builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// ------------------ Middleware ------------------
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -34,7 +46,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

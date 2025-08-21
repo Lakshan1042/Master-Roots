@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Master_Roots")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc9f3c5925bba67219dc5484100330b31bdb1165")]
 [assembly: System.Reflection.AssemblyProductAttribute("Master_Roots")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Master_Roots")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
