@@ -1,36 +1,30 @@
-using Master_Roots.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ------------------ SQL Server for Identity ------------------
-var sqlConnection = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(sqlConnection));
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-// ------------------ MongoDB for Custom Data ------------------
+// ------------------ MongoDB ------------------
 builder.Services.AddSingleton<IMongoClient>(s =>
 {
-    var mongoConnection = builder.Configuration.GetConnectionString("MongoDb");
+    var mongoConnection = builder.Configuration.GetConnectionString("MongoDb")
+        ?? throw new InvalidOperationException("MongoDB connection string not found.");
     return new MongoClient(mongoConnection);
 });
 
-// Register a MongoDB database accessor
+// Register MongoDB database accessor
 builder.Services.AddScoped<IMongoDatabase>(s =>
 {
     var client = s.GetRequiredService<IMongoClient>();
-    return client.GetDatabase("YourMongoDatabaseName"); // <-- Replace with your db name
+    var databaseName = builder.Configuration.GetValue<string>("MongoDbDatabase")
+        ?? "StudentDb"; // fallback name
+    return client.GetDatabase(databaseName);
 });
+
+// ------------------ Identity (in-memory, optional) ------------------
+// If you still want login/register but don’t want SQL Server
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddDefaultTokenProviders(); // no EF storage
 
 // ------------------ Other Services ------------------
 builder.Services.AddControllersWithViews();
@@ -41,7 +35,7 @@ var app = builder.Build();
 // ------------------ Middleware ------------------
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
@@ -54,6 +48,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // needed if you keep Identity
 app.UseAuthorization();
 
 app.MapControllerRoute(
